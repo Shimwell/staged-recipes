@@ -1,0 +1,115 @@
+# Note: there are many handy hints in comments in this example -- remove them when you've finalized your recipe
+
+# Jinja variables help maintain the recipe as you'll update the version only here.
+# Using the name variable with the URL in line 14 is convenient
+# when copying and pasting from another recipe, but not really needed.
+{% set org = "openmc-dev" %}
+{% set name = "openmc" %}
+{% set version = "0.12.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  - url: https://github.com/{{ org }}/{{ name }}/archive/v{{ version }}.tar.gz
+    fn: {{ name }}-{{ version }}.tar.gz
+    sha256: d55e287289b5e7a621b92eb94d4521c9bbb6525ebfece5a1a4debc0ce28acb81
+  - url: https://github.com/zeux/pugixml/archive/41b6ff21c455865bb8ef67c5952b7f895b62bacc.tar.gz
+    sha256: b145725a8eb17081783d3e0b7118ec825140f8972da5ab5e15c1d051810c1a93
+    folder: vendor/pugixml
+  - url: https://github.com/martinmoene/gsl-lite/archive/913e86d49c6a1acca980f4e325378f9dc393493a.tar.gz
+    sha256: 1978f9c6a6c3fffebac174c34d907ad145a5805e01f94b2de433aa5b0e6efdf4
+    folder: vendor/gsl-lite
+  - url: https://github.com/xtensor-stack/xtensor/archive/0.21.3.tar.gz
+    sha256: f63c25cafea4bfc268edb26e6f5004a28a2f689e6a852bb3559c553106c8d6bf
+    folder: vendor/xtensor
+  - url: https://github.com/xtensor-stack/xtl/archive/0.6.13.tar.gz
+    sha256: 12bd628dee4a7a55db79bff5a47fb7d96b1a4dba780fbd5c81c3a15becfdd99c
+    folder: vendor/xtl
+  - url: https://github.com/fmtlib/fmt/archive/65ac626c5856f5aad1f1542e79407a6714357043.tar.gz
+    sha256: 5a2ddaa029977d64783a0abfa6e3f154fad6954b7622199fcbcd845918f40058
+    folder: vendor/fmt
+  - url: https://github.com/svalinn/DAGMC/archive/v3.2-rc.tar.gz
+    sha256: becd61148aa4f9a3a312eb69e33d01779797007cc13715d60bb650ad5e71b183
+
+build:
+  number: 0
+  skip: true  # [win]
+  skip: true  # [py<35]
+  detect_binary_files_with_prefix: true
+
+requirements:
+  build:
+    - cmake
+    - pkg-config
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - {{ compiler("fortran") }}
+  host:
+    - hdf5
+    - moab 5.*
+    - libblas
+    - liblapack
+    - setuptools
+    - pip
+    - numpy
+    - cython
+    - matplotlib-base
+    - h5py
+    - python
+  run:
+    - hdf5
+    - python
+    - {{ pin_compatible('numpy') }}
+    - h5py
+    - scipy
+    - pandas
+    - matplotlib-base
+    - lxml
+    - uncertainties
+    - moab 5.*
+    - zlib
+
+test:
+  commands:
+    - test -f "${PREFIX}/bin/openmc"
+    - openmc --version
+    - make_watertight --help
+  imports:
+    - openmc
+    - openmc.data
+    - openmc.deplete
+    - openmc.lib
+
+about:
+  home: https://openmc.org
+  license: MIT
+  license_family: MIT
+  license_file: LICENSE.txt
+  summary: 'OpenMC Monte Carlo Code with DAGMC'
+  description: |
+    OpenMC is a community-developed Monte Carlo neutron and photon transport
+    simulation code. It is capable of performing fixed source, k-eigenvalue, and
+    subcritical multiplication calculations on models built using either a
+    constructive solid geometry or CAD representation. OpenMC supports both
+    continuous-energy and multigroup transport. The continuous-energy particle
+    interaction data is based on a native HDF5 format that can be generated from
+    ACE files produced by NJOY. Parallelism is enabled via a hybrid MPI and
+    OpenMP programming model. DAGMC is a Direct Accelerated Geometry Toolkit which
+    facilitates particle transport on a faceted mesh geometry.
+  doc_url: https://docs.openmc.org
+  dev_url: https://github.com/openmc-dev/openmc
+
+extra:
+  recipe-maintainers:
+    # DAGMC conda recipe maintainers
+    - gonuke
+    - pshriwise
+    - ljacobson64
+    - kkiesling
+    - bam241
+    - ngranda
+    # OpenMC conda recipe maintainers
+    - scopatz
+    - paulromano
