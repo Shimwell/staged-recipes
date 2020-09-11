@@ -12,6 +12,7 @@ source:
 
 build:
   number: 0
+  noarch: python
   script: "{{ PYTHON }} -m pip install . -vv"
 
 requirements:
@@ -19,9 +20,9 @@ requirements:
     - python
     - pip
     - cadquery >=2.0
-    run:
-      - python
-      - cadquery >=2.0
+  run:
+    - python
+    - cadquery >=2.0
 
 test:
   imports:
@@ -32,14 +33,14 @@ about:
   license: MIT
   license_family: MIT
   license_file: LICENSE.txt
-  summary: 'Create parametric 3D fusion reactor CAD models'
+  summary: 'Create parametric 3D fusion reactor CAD models.'
 
   description: |
-  The Paramak python package allows rapid production of 3D CAD models of fusion reactors.
-  The purpose of the Paramak is to provide geometry for parametric studies.
-  It is possible to use the created geometry in engineering and neutronics studies as the
-  STP or STL files produced can be automatically converted to DAGMC compatable neutronics
-  models or meshed and used in finite element analysis codes.
+    The Paramak python package allows rapid production of 3D CAD models of fusion reactors.
+    The purpose of the Paramak is to provide geometry for parametric studies.
+    It is possible to use the created geometry in engineering and neutronics studies as the
+    STP or STL files produced can be automatically converted to DAGMC compatable neutronics
+    models or meshed and used in finite element analysis codes.
   doc_url: https://paramak.readthedocs.io/en/main/
   dev_url: https://github.com/ukaea/paramak
 
