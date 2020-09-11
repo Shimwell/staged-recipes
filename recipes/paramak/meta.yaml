@@ -1,6 +1,6 @@
 
 {% set name = "paramak" %}
-{% set version = "0.0.14" %}
+{% set version = "0.0.16" %}
 
 package:
   name: {{ name|lower }}
@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 95ca57ea7c0d3624cd48b910155635e57fbbe3057e3bd37386855f1feeec751b
+  sha256: 815145a891ad8cab0ddd114dcdbc879522c2b66e287ea3d5d960601510211dbd
 
 build:
   number: 0
@@ -19,10 +19,12 @@ requirements:
   host:
     - python
     - pip
-    - cadquery >=2.0
+    - cadquery
+    - matplotlib
   run:
     - python
-    - cadquery >=2.0
+    - cadquery
+    - matplotlib
 
 test:
   imports:
