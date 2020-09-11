@@ -21,12 +21,22 @@ requirements:
     - pip
     - cadquery
     - matplotlib
+    - numpy
+    - plasmaboundaries
     - plotly
+    - pillow
+    - scipy
+    - sympy
   run:
     - python
     - cadquery
     - matplotlib
+    - numpy
+    - plasmaboundaries
     - plotly
+    - pillow
+    - scipy
+    - sympy
 
 test:
   imports:
