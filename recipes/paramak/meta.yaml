@@ -21,10 +21,12 @@ requirements:
     - pip
     - cadquery
     - matplotlib
+    - plotly
   run:
     - python
     - cadquery
     - matplotlib
+    - plotly
 
 test:
   imports:
