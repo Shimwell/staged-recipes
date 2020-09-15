@@ -19,7 +19,7 @@ requirements:
   host:
     - python
     - pip
-    - cadquery
+    - cadquery=2
     - matplotlib
     - numpy
     - plasmaboundaries
@@ -29,7 +29,7 @@ requirements:
     - sympy
   run:
     - python
-    - cadquery
+    - cadquery=2
     - matplotlib
     - numpy
     - plasmaboundaries
