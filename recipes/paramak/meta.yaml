@@ -1,6 +1,6 @@
 
 {% set name = "paramak" %}
-{% set version = "0.0.16" %}
+{% set version = "0.0.19" %}
 
 package:
   name: {{ name|lower }}
@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 815145a891ad8cab0ddd114dcdbc879522c2b66e287ea3d5d960601510211dbd
+  sha256: e31e2884e48ff3979e746f55b612a2d00d7decb9d5fd79ef2fee67eeccabbf0d
 
 build:
   number: 0
