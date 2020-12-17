@@ -1,0 +1,46 @@
+
+{% set name = "openmc-plotter" %}
+{% set version = "0.1.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 43f89bc94ca76bd45fe26cb59b1a17c801ccf0db1578d304589f050175070def
+
+build:
+  number: 0
+  noarch: python
+  script: "{{ PYTHON }} -m pip install . -vv"
+
+requirements:
+  host:
+    - python >=3.5
+    - pip
+  run:
+    - python >=3.5
+    - openmc
+    - numpy
+    - matplotlib
+    - pyside2
+    - vtk
+
+about:
+  home: https://github.com/openmc-dev/plotter
+  license: MIT
+  license_family: MIT
+  license_file: LICENSE
+  summary: 'A tool for making parametric material cards for use in neutronics codes.'
+
+  description: |
+    A graphical interface for visualizing and manipulating OpenMC plot slices.
+  doc_url: https://github.com/openmc-dev/plotter
+  dev_url: https://github.com/openmc-dev/plotter
+
+extra:
+  recipe-maintainers:
+    - paulromano
+    - pshriwise
+    - shimwell
