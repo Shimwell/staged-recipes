@@ -1,0 +1,60 @@
+
+{% set org = "shimwell" %}
+{% set name = "double-down" %}
+{% set version = "0.1.0" %}
+{% set sha256 = "d55e287289b5e7a621b92eb94d4521c9bbb6525ebfece5a1a4debc0ce28acb81" %}
+
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  - https://github.com/pshriwise/double-down
+  - url: https://github.com/{{ org }}/{{ name }}/archive/v{{ version }}.tar.gz
+    fn: {{ name }}-{{ version }}.tar.gz
+    sha256: {{ sha256 }}
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - libblas
+    - liblapack
+    - hdf5
+    - cmake
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - {{ compiler("fortran") }}
+  host:
+    - embree
+    - moab 5.*
+  run:
+
+test:
+  commands:
+    - ctest -C release
+
+
+about:
+  home: https://github.com/pshriwise/double-down/
+  license: MIT
+  license_file: LICENSE
+  summary: A double precision interface to Embree
+  description: |
+    double-down is a double precision interface to Embree via the Mesh Oriented
+    dAtaBase (MOAB). Primitives (2D mesh elements) are stored in MOAB. New
+    primitive types are defined using Embree's user geometry interface where
+    they interace with the MOAB instance to provide robust bounding values for
+    the mesh elements as well as intersection methods based in double
+    precision. Ray values come in and out of the interface in double precision,
+    making them useful for scientific purposes while applying the speed
+    provided by the dedicated team of Intel developers who have created Embree.
+  doc_url: https://github.com/pshriwise/double-down/
+  dev_url: https://github.com/pshriwise/double-down/
+
+extra:
+  recipe-maintainers:
+    - pshriwise
+    - shimwell
